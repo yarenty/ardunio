@@ -1,0 +1,87 @@
+group 'com.yarenty'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply plugin: 'scalaStyle'
+apply plugin: 'application'
+
+
+mainClassName = 'com.yarenty.ardunio.SerialTest'
+group = "com.yarenty.ardunio"
+sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        maven {
+            url "http://repo1.maven.org/maven2/"
+        }
+        jcenter {
+            url "http://jcenter.bintray.com/"
+        }
+        maven {
+            url "http://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath 'org.github.mansur.scalastyle:gradle-scalastyle-plugin_2.10:0.4.1'
+    }
+}
+
+ext {
+    scalaBinaryVersion = '2.11'
+    scalaVersion = '2.11.8'
+    junitVersion = '4.12'
+}
+
+repositories {
+    maven {
+        url "http://repo1.maven.org/maven2/"
+    }
+    maven {
+        url "http://repository.cloudera.com/artifactory/cloudera-repos/"
+    }
+    maven {
+        url "http://repo.hortonworks.com/content/repositories/releases/"
+    }
+    maven {
+        url "http://oss.sonatype.org/content/repositories/releases/"
+    }
+    maven {
+        url "http://repository.apache.org/content/groups/snapshots"
+    }
+    maven {
+        url "https://nexus.arcsmed.at/content/repositories/homer.core/"
+    }
+}
+
+dependencies {
+    compile group: 'org.scala-lang', name: 'scala-library', version: "$scalaVersion"
+    compile group: 'gnu.io', name: 'rxtx', version: '2.1.7'
+    testCompile group: 'org.scalatest', name: "scalatest_$scalaBinaryVersion", version: '3.0.4'
+    testCompile "junit:junit:${junitVersion}"
+
+}
+
+// Activate Zinc compiler and configure scalac
+tasks.withType(ScalaCompile) {
+
+    ScalaCompileOptions.metaClass.daemonServer = true
+    ScalaCompileOptions.metaClass.fork = true
+    ScalaCompileOptions.metaClass.useAnt = false
+    ScalaCompileOptions.metaClass.useCompileDaemon = false
+}
+
+
+scalaStyle {
+    configLocation = "$rootDir/scalastyle-config.xml"
+    includeTestSourceDirectory = true
+    source = "src/main/scala"
+    testSource = "src/test/scala"
+    outputFile = "$buildDir/checkstyle-result.xml"
+}
+
+
+

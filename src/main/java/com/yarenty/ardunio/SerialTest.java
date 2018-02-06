@@ -32,6 +32,10 @@ public class SerialTest implements SerialPortEventListener {
     /** Default bits per second for COM port. */
     private static final int DATA_RATE = 9600;
 
+    
+       
+    
+    
     public void initialize() {
         // the next line is for Raspberry Pi and 
         // gets us into the while loop and was suggested here was suggested http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
@@ -89,6 +93,8 @@ public class SerialTest implements SerialPortEventListener {
         }
     }
 
+
+    
     /**
      * Handle an event on the serial port. Read the data and print it.
      */
@@ -97,6 +103,7 @@ public class SerialTest implements SerialPortEventListener {
             try {
                 String inputLine=input.readLine();
                 System.out.println(inputLine);
+                CURL.getRestContent("http://www.yarenty.com/log.php?"+inputLine,500,500);
             } catch (Exception e) {
                 System.err.println(e.toString());
             }

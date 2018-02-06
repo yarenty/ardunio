@@ -79,3 +79,6 @@ scoverage/
 testScoverage/
 src/scoverage/
 src/testScoverage/
+
+gradlew
+gradlew.bat

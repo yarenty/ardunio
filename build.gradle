@@ -1,8 +1,8 @@
 group 'com.yarenty'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
 apply plugin: 'scala'
+apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'scalaStyle'
 apply plugin: 'application'
@@ -12,6 +12,17 @@ mainClassName = 'com.yarenty.ardunio.SerialTest'
 group = "com.yarenty.ardunio"
 sourceCompatibility = 1.8
 
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/scala', 'src/main/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
+}
+    
 buildscript {
     repositories {
         maven {
@@ -60,6 +71,10 @@ repositories {
 dependencies {
     compile group: 'org.scala-lang', name: 'scala-library', version: "$scalaVersion"
     compile group: 'gnu.io', name: 'rxtx', version: '2.1.7'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
+
+
+
     testCompile group: 'org.scalatest', name: "scalatest_$scalaBinaryVersion", version: '3.0.4'
     testCompile "junit:junit:${junitVersion}"
 

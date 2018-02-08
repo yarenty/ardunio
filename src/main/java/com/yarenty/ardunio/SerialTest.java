@@ -7,7 +7,9 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
-import java.util.Enumeration;
+import org.joda.time.DateTime;
+
+import java.util.*;
 
 
 public class SerialTest implements SerialPortEventListener {
@@ -32,7 +34,11 @@ public class SerialTest implements SerialPortEventListener {
     /** Default bits per second for COM port. */
     private static final int DATA_RATE = 9600;
 
-    
+    private DateTime currentDate = new DateTime();
+    private List<Integer> lights = new ArrayList<Integer>();
+    private List<Integer> sounds = new ArrayList<Integer>();
+    private Boolean motion = false;
+    private String sendMe="";
        
     
     
@@ -93,6 +99,57 @@ public class SerialTest implements SerialPortEventListener {
         }
     }
 
+    public synchronized Boolean updateStats(String in){
+        String[] a = in.split(";");
+        
+        //TODO:  clean that ;-)
+        Integer light = Integer.parseInt(a[0].split(":")[1]);
+        Integer sound = Integer.parseInt(a[2].split(":")[1]);
+        Boolean m = false;
+        if (Integer.parseInt(a[1].split(":")[1]) == 1) m=true;
+
+        DateTime newDate = new DateTime();
+        if (newDate.getMinuteOfHour() != currentDate.getMinuteOfHour()) {
+            //update clean send
+            lights.add(light);
+            sounds.add(sound);
+            if (!motion) motion=m;
+            
+            Integer ll = 0;
+            for (Integer l : lights) {
+                ll+=l;
+            }
+            ll = ll/lights.size();
+
+            Integer ss = 0;
+            for (Integer s : sounds) {
+                ss+=s;
+            }
+            ss = ss/sounds.size();
+            
+            Integer mm = 0;
+            if (motion) mm=1;
+
+            sendMe="year=" + newDate.getYear() + "&month=" + newDate.getMonthOfYear() + "&day=" + newDate.getDayOfMonth() +"&hour=" + 
+                    newDate.getHourOfDay() +"&minute=" + newDate.getMinuteOfHour() +"&light="+ll +"&sound="+ss+"&motion="+mm;
+
+            
+            motion=m;
+            lights = new ArrayList<Integer>();
+            sounds = new ArrayList<Integer>();
+            currentDate=newDate;
+            
+            return true;
+        } else {
+            //just update stats
+            lights.add(light);
+            sounds.add(sound);
+            if (!motion) motion=m;
+            
+            return false;
+        }
+        
+    }
 
     
     /**
@@ -102,8 +159,11 @@ public class SerialTest implements SerialPortEventListener {
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
                 String inputLine=input.readLine();
-                System.out.println(inputLine);
-                CURL.getRestContent("http://www.yarenty.com/log.php?"+inputLine,500,500);
+                //System.out.println(inputLine);
+                if (updateStats(inputLine)) {
+                    System.out.println("http://www.yarenty.com/ardunio/add.php?" + sendMe);
+//                    CURL.getRestContent("http://www.yarenty.com/ardunio/add.php?" + sendMe, 500, 500);
+                }
             } catch (Exception e) {
                 System.err.println(e.toString());
             }

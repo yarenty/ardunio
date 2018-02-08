@@ -15,3 +15,26 @@ RXTX library: http://jlog.org/rxtx-lin.html
 http://playground.arduino.cc/interfacing/java
 
 
+## Access to Port - Linux
+
+```
+sudo chown yarenty /dev/ttyUSB0
+```
+ 
+ 
+ 
+## Changelog
+
+### TODO
+- send PHP to server
+- PHP display
+
+
+
+### v0.02
+- joda DateTime
+- reading from port
+
+### v0.01 
+- connect to port
+- CURL

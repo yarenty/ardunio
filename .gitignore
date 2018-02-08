@@ -82,3 +82,6 @@ src/testScoverage/
 
 gradlew
 gradlew.bat
+gradle/*
+
+server/db.php

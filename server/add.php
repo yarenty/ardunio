@@ -1,7 +1,19 @@
 <?php
 
+//phpinfo();
+
+
+include_once 'db.php';
+include_once 'Office.php';
+
+header("content-type:application/json");
+
+
 $out=0;
+
+
 if ( isset($_GET["year"]) ) {
+    
 	$year = $_GET["year"];
 	$month = $_GET["month"];
 	$day = $_GET["day"];
@@ -12,8 +24,8 @@ if ( isset($_GET["year"]) ) {
 	$motion = $_GET["motion"];
 	
 
-function addRecord($year, $month, $day, $hour, $minute, $light, $sound,$motion) {
-	
+function addRecord($year, $month, $day, $hour, $minute, $light, $sound,$motion) {	
+    
 	$o = new Office();
 	$o->year = $year;
 	$o->month = $month;
@@ -23,19 +35,16 @@ function addRecord($year, $month, $day, $hour, $minute, $light, $sound,$motion) 
 	$o->light = $light;
 	$o->sound = $sound;
 	$o->motion = $motion;
-	
+    
 	return $o->save();
 }
 
 
 
-header("content-type:application/json");
-
 //date_default_timezone_set($user->timezone);
 
 $out = addRecord($year, $month, $day, $hour, $minute, $light, $sound, $motion);
 //phpinfo();
-
 // echo "<br/> and ??<br/>";
 //  echo "POST::<pre>";
 //  print_r($_POST);
@@ -43,6 +52,7 @@ $out = addRecord($year, $month, $day, $hour, $minute, $light, $sound, $motion);
 // echo "So setting done:".$id;
 // echo "<br/>";
 // echo "for user:".$uid."<br/>";
+
 
 }
 

@@ -84,8 +84,8 @@ class Office {
 			sound,
 			motion
 		from ".$db->prefix."office where year= ".$this->year." 
-				and month = '".$this->month."' 
-				and day ='".$this->day."' order by hour,minute";
+				and month = ".$this->month." 
+				and day = ".$this->day." order by hour,minute";
 		$out = $db->getRowSet($sql);
 	
 		return $out;

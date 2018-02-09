@@ -31,7 +31,9 @@ which java
 ```
 copy RXTX libraries to that folders (see first point above) 
  
+## Example link
 
+http://www.yarenty.com/ardunio/add.php?year=2018&month=1&day=9&hour=10&minute=12&light=0&sound=222&&motion=1
 
  
  

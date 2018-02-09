@@ -1,10 +1,19 @@
 <?php
+ error_reporting(E_ALL); ini_set('display_errors', 1);
+ 
+
+include_once 'db.php';
+include_once 'Office.php';
+
+$year = date("Y");
+$month = date("m");
+$day = date("d");
 
 if ( isset($_GET["year"]) ) {
 	$year = $_GET["year"];
 	$month = $_GET["month"];
 	$day = $_GET["day"];
-	
+	}
 
 	
 	$o = new Office();
@@ -12,7 +21,7 @@ if ( isset($_GET["year"]) ) {
 	$o->month = $month;
 	$o->day = $day;
 	
-	$d =  $o->getDay();
+	$readings =  $o->getDay();
 
 
 ?>
@@ -32,13 +41,13 @@ if ( isset($_GET["year"]) ) {
 </head>
 
 <body>
-    <canvas width="2400" height="800" id="canvas"></canvas>
+    <canvas width="1600" height="800" id="canvas"></canvas>
 <script>
  var lineChartData = {
  labels: [ <?
  
- for (i = 0 to $d.length) {
-  echo '"'.$d[i][1]."-".$d[i][2]."-".$d[i][3]." ".$d[i][4].":".$d[i][5].'",';
+ foreach ($readings as $d) {
+  echo '"'.$d[1]."-".$d[2]."-".$d[3]." ".$d[4].":".$d[5].'",';
  }
  //load labels
  ?>], 
@@ -48,8 +57,8 @@ if ( isset($_GET["year"]) ) {
     borderWidth:1.5,pointRadius:1.2, fill: false,
     fill: false,
     data: [<?
- for (i = 0 to $d.length) {
-  echo $d[i][8].',';
+ foreach ($readings as $d) {
+  echo $d[8].',';
  }
     
     ?>,], yAxisID: "y-axis-0",}, {
@@ -58,8 +67,8 @@ if ( isset($_GET["year"]) ) {
        borderWidth:1.5,pointRadius:1.2, fill: false,
        fill: false,
        data: [<?
- for (i = 0 to $d.length) {
-  echo $d[i][6].',';
+ foreach ($readings as $d) {
+  echo $d[6].',';
  }
        
        ?>], yAxisID: "y-axis-1",}, {
@@ -68,8 +77,8 @@ if ( isset($_GET["year"]) ) {
           borderWidth:1.5,pointRadius:1.2, fill: false,
           fill: false,
           data: [ <?
- for (i = 0 to $d.length) {
-  echo $d[i][7].',';
+ foreach ($readings as $d) {
+  echo $d[7].',';
  }
           
           ?>], yAxisID: "y-axis-2",}
@@ -140,6 +149,29 @@ if ( isset($_GET["year"]) ) {
          };
      
          </script>
+         
+         <br/>
+         
+         <center>
+         <form action="index.php" method="GET">
+         
+         <select name="year">
+           <option value="2018">2018</option>
+         </select>
+         
+                  <select name="month">
+                    <option value="2">2</option>
+                  </select>
+                                    <select name="day">
+                                      <option value="8">8</option>
+                                      <option value="9">9</option>
+                                    </select>
+         <input type="submit" value="Submit">
+         </form>
+         
+         </center> 
+         
+         
      </body>
      
      </html>

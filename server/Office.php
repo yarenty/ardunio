@@ -61,8 +61,6 @@ class Office {
 		$this->sound."','".
 		$this->motion."') ";
 		
-		debug("SQL::".$sql);
-		
 		$out = $db->insertRow( $sql);
 
 		$this->id = $out;
@@ -73,9 +71,8 @@ class Office {
 	
 	
 	
-	function getDay($year,$month,$day){
+	function getDay(){
 		$db  = new db();
-		$date = date("Y-m-d");
 		$sql = "select
 			id, 
 			year,
@@ -86,10 +83,9 @@ class Office {
 			light,
 			sound,
 			motion
-		from ".$db->prefix."office where year= ".$year." 
-				and month = '".$month."' 
-				and day ='".$day."' order by hour,minute";
-		debug("SQL::".$sql);
+		from ".$db->prefix."office where year= ".$this->year." 
+				and month = '".$this->month."' 
+				and day ='".$this->day."' order by hour,minute";
 		$out = $db->getRowSet($sql);
 	
 		return $out;

@@ -19,6 +19,7 @@ public class SerialTest implements SerialPortEventListener {
             "/dev/tty.usbserial-A9007UX1", // Mac OS X
             "/dev/ttyACM0", // Raspberry Pi
             "/dev/ttyUSB0", // Linux
+            "/dev/ttyUSB1", // Linux
             "COM3", // Windows
     };
     /**
@@ -103,52 +104,52 @@ public class SerialTest implements SerialPortEventListener {
         String[] a = in.split(";");
         
         //TODO:  clean that ;-)
-        Integer light = Integer.parseInt(a[0].split(":")[1]);
-        Integer sound = Integer.parseInt(a[2].split(":")[1]);
-        Boolean m = false;
-        if (Integer.parseInt(a[1].split(":")[1]) == 1) m=true;
+             Integer light = Integer.parseInt(a[0].split(":")[1]);
+             Integer sound = Integer.parseInt(a[2].split(":")[1]);
+             Boolean m = false;
+             if (Integer.parseInt(a[1].split(":")[1]) == 1) m = true;
 
-        DateTime newDate = new DateTime();
-        if (newDate.getMinuteOfHour() != currentDate.getMinuteOfHour()) {
-            //update clean send
-            lights.add(light);
-            sounds.add(sound);
-            if (!motion) motion=m;
-            
-            Integer ll = 0;
-            for (Integer l : lights) {
-                ll+=l;
-            }
-            ll = ll/lights.size();
+             DateTime newDate = new DateTime();
+             if (newDate.getMinuteOfHour() != currentDate.getMinuteOfHour()) {
+                 //update clean send
+                 lights.add(light);
+                 sounds.add(sound);
+                 if (!motion) motion = m;
 
-            Integer ss = 0;
-            for (Integer s : sounds) {
-                ss+=s;
-            }
-            ss = ss/sounds.size();
-            
-            Integer mm = 0;
-            if (motion) mm=1;
+                 Integer ll = 0;
+                 for (Integer l : lights) {
+                     ll += l;
+                 }
+                 ll = ll / lights.size();
 
-            sendMe="year=" + newDate.getYear() + "&month=" + newDate.getMonthOfYear() + "&day=" + newDate.getDayOfMonth() +"&hour=" + 
-                    newDate.getHourOfDay() +"&minute=" + newDate.getMinuteOfHour() +"&light="+ll +"&sound="+ss+"&motion="+mm;
+                 Integer ss = 0;
+                 for (Integer s : sounds) {
+                     ss += s;
+                 }
+                 ss = ss / sounds.size();
 
-            
-            motion=m;
-            lights = new ArrayList<Integer>();
-            sounds = new ArrayList<Integer>();
-            currentDate=newDate;
-            
-            return true;
-        } else {
-            //just update stats
-            lights.add(light);
-            sounds.add(sound);
-            if (!motion) motion=m;
-            
-            return false;
-        }
-        
+                 Integer mm = 0;
+                 if (motion) mm = 1;
+
+                 sendMe = "year=" + newDate.getYear() + "&month=" + newDate.getMonthOfYear() + "&day=" + newDate.getDayOfMonth() + "&hour=" +
+                         newDate.getHourOfDay() + "&minute=" + newDate.getMinuteOfHour() + "&light=" + ll + "&sound=" + ss + "&motion=" + mm;
+
+
+                 motion = m;
+                 lights = new ArrayList<Integer>();
+                 sounds = new ArrayList<Integer>();
+                 currentDate = newDate;
+
+                 return true;
+             } else {
+                 //just update stats
+                 lights.add(light);
+                 sounds.add(sound);
+                 if (!motion) motion = m;
+
+                 return false;
+             }
+
     }
 
     
@@ -159,10 +160,10 @@ public class SerialTest implements SerialPortEventListener {
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
                 String inputLine=input.readLine();
-                //System.out.println(inputLine);
+//                System.out.println(inputLine);
                 if (updateStats(inputLine)) {
                     System.out.println("http://www.yarenty.com/ardunio/add.php?" + sendMe);
-//                    CURL.getRestContent("http://www.yarenty.com/ardunio/add.php?" + sendMe, 500, 500);
+                    CURL.getRestContent("http://www.yarenty.com/ardunio/add.php?" + sendMe, 500, 500);
                 }
             } catch (Exception e) {
                 System.err.println(e.toString());

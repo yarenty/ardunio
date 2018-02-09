@@ -10,6 +10,8 @@ RXTX library: http://jlog.org/rxtx-lin.html
 - You may need to Log in as 'root' and add your jLog user to the group owning the '/var/lock' directory and the group owning the serial port (e.g. /dev/ttyS0) to be used. This is not needed for Ubuntu 11.04.
 
 
+
+
 ## Basic intro
 
 http://playground.arduino.cc/interfacing/java
@@ -22,15 +24,32 @@ sudo chown yarenty /dev/ttyUSB0
 ```
  
  
+## java.lang.UnsatisfiedLinkError: no rxtxSerial in java.library.path
+check if you got proper java directories:
+```
+which java
+```
+copy RXTX libraries to that folders (see first point above) 
+ 
+
+
+ 
+ 
  
 ## Changelog
 
 ### TODO
-- send PHP to server
+
+### v0.05
 - PHP display
 
 
+### v0.04
+- build big jar to run from command line
 
+### v0.03
+- send PHP to server
+    
 ### v0.02
 - joda DateTime
 - reading from port

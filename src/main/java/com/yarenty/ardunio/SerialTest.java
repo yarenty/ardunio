@@ -162,8 +162,8 @@ public class SerialTest implements SerialPortEventListener {
                 String inputLine=input.readLine();
 //                System.out.println(inputLine);
                 if (updateStats(inputLine)) {
-                    System.out.println("http://www.yarenty.com/ardunio/add.php?" + sendMe);
-                    CURL.getRestContent("http://www.yarenty.com/ardunio/add.php?" + sendMe, 500, 500);
+                    String out = CURL.getRestContent("http://www.yarenty.com/ardunio/add.php?" + sendMe, 5000, 5000);
+                    System.out.println("http://www.yarenty.com/ardunio/add.php?" + sendMe + "  =>" + out);
                 }
             } catch (Exception e) {
                 System.err.println(e.toString());

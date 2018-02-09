@@ -38,6 +38,8 @@ buildscript {
 
     dependencies {
         classpath 'org.github.mansur.scalastyle:gradle-scalastyle-plugin_2.10:0.4.1'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+
     }
 }
 
@@ -99,4 +101,50 @@ scalaStyle {
 }
 
 
+
+// In resulting jar include Scala binary version
+jar {
+    baseName = "${project.name}_${scalaBinaryVersion}"
+    manifest {
+        attributes(
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' ')
+        )
+    }
+}
+
+// Support for application assembly
+apply plugin: 'com.github.johnrengelman.shadow'
+
+shadowJar {
+    appendix = 'app'
+    archiveName = "serial.${extension}"
+
+    // Dependencies included in resulting jar file
+    dependencies {
+        //SCALA dependency
+        include(dependency("org.scala-lang:scala-library"))
+        include(dependency("org.scala-lang:scala-reflect"))
+//        include(dependency("org.scalaz:scalaz-core_${scalaBinaryVersion}"))
+
+ 
+        include(dependency("com.typesafe.akka:akka-actor_$scalaBinaryVersion"))
+
+        //H2O dependency
+        include(dependency("gnu.io:rxtx"))
+        include(dependency("joda-time:joda-time"))
+        include(dependency("org.joda:joda-convert"))
+
+        include(dependency("log4j:log4j"))
+        include(dependency("commons-io:commons-io"))
+        include(dependency("org.javassist:javassist"))
+ 
+        include(dependency("org.apache.httpcomponents:httpclient"))
+        include(dependency("org.apache.httpcomponents:httpcore"))
+        //Correlation algorithms and other math stuff
+        include(dependency("org.apache.commons:commons-math3"))
+
+         include(dependency("com.typesafe:config"))
+        include(dependency("com.typesafe.scala-logging:scala-logging"))
+    }
+}
 

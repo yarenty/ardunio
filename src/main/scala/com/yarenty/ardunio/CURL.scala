@@ -28,6 +28,8 @@ object CURL {
       val inputStream = entity.getContent
       content = io.Source.fromInputStream(inputStream).getLines.mkString
       inputStream.close
+    } else {
+      content = "no entity!"
     }
     httpClient.getConnectionManager.shutdown
     content

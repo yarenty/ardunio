@@ -115,6 +115,7 @@ jar {
 // Support for application assembly
 apply plugin: 'com.github.johnrengelman.shadow'
 
+
 shadowJar {
     appendix = 'app'
     archiveName = "serial.${extension}"
@@ -123,28 +124,18 @@ shadowJar {
     dependencies {
         //SCALA dependency
         include(dependency("org.scala-lang:scala-library"))
-        include(dependency("org.scala-lang:scala-reflect"))
-//        include(dependency("org.scalaz:scalaz-core_${scalaBinaryVersion}"))
-
- 
-        include(dependency("com.typesafe.akka:akka-actor_$scalaBinaryVersion"))
 
         //H2O dependency
         include(dependency("gnu.io:rxtx"))
         include(dependency("joda-time:joda-time"))
         include(dependency("org.joda:joda-convert"))
 
-        include(dependency("log4j:log4j"))
-        include(dependency("commons-io:commons-io"))
-        include(dependency("org.javassist:javassist"))
+//        include(dependency("commons-io:commons-io"))
+        include(dependency("commons-logging:commons-logging"))
+        include(dependency("commons-codec:commons-codec"))
  
         include(dependency("org.apache.httpcomponents:httpclient"))
         include(dependency("org.apache.httpcomponents:httpcore"))
-        //Correlation algorithms and other math stuff
-        include(dependency("org.apache.commons:commons-math3"))
-
-         include(dependency("com.typesafe:config"))
-        include(dependency("com.typesafe.scala-logging:scala-logging"))
     }
 }
 

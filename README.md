@@ -1,7 +1,7 @@
 ARDUNIO communication
 ---------------------
 
-# BIg  PICTURE
+# BIG PICTURE
 
 ![Example daily output](/pics/IoT_architecture.PNG)
 
@@ -11,7 +11,7 @@ sensors => ardunio => serial port => java/scala collector => send to server => D
 
 
 
-
+# PARTS
 
 ## Linux RXTX installation:
 RXTX library: http://jlog.org/rxtx-lin.html
@@ -22,43 +22,47 @@ RXTX library: http://jlog.org/rxtx-lin.html
 
 
 
-
-## Basic intro
+##  Java connection - basic intro
 
 http://playground.arduino.cc/interfacing/java
 
 
-## Access to Port - Linux
+## Access to the USB port - Linux
 
 ```
 sudo chown yarenty /dev/ttyUSB0
 ```
  
  
-## java.lang.UnsatisfiedLinkError: no rxtxSerial in java.library.path
+## ON ERROR: java.lang.UnsatisfiedLinkError: no rxtxSerial in java.library.path
 check if you got proper java directories:
 ```
 which java
 ```
 copy RXTX libraries to that folders (see first point above) 
  
-## Example link
+
+# EXAMPLES 
+
+## Web data collection link
 
 ```
 http://www.yarenty.com/ardunio/add.php?year=2018&month=1&day=9&hour=10&minute=12&light=0&sound=222&&motion=1
 ```
 
 
-## Example output
+## Output
 
 ![Example daily output](/pics/IoT_example.png)
 
  
- 
-## Changelog
 
-### TODO
+# TODO
 - server: calendar
+ 
+ 
+ 
+# Changelog
 
 ### v0.06 
 - java: full build

@@ -3,6 +3,9 @@ ARDUNIO communication
 
 # BIg  PICTURE
 
+![Example daily output](/pics/IoT_architecture.PNG)
+
+
 PATH:  
 sensors => ardunio => serial port => java/scala collector => send to server => DB persistence => visualizaiton
 
@@ -48,7 +51,7 @@ http://www.yarenty.com/ardunio/add.php?year=2018&month=1&day=9&hour=10&minute=12
 
 ## Example output
 
-![Example daily output](/example/IoT_example.png)
+![Example daily output](/pics/IoT_example.png)
 
  
  

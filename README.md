@@ -1,6 +1,14 @@
 ARDUNIO communication
 ---------------------
 
+# BIg  PICTURE
+
+PATH:  
+sensors => ardunio => serial port => java/scala collector => send to server => DB persistence => visualizaiton
+
+
+
+
 
 ## Linux RXTX installation:
 RXTX library: http://jlog.org/rxtx-lin.html
@@ -33,29 +41,40 @@ copy RXTX libraries to that folders (see first point above)
  
 ## Example link
 
+```
 http://www.yarenty.com/ardunio/add.php?year=2018&month=1&day=9&hour=10&minute=12&light=0&sound=222&&motion=1
+```
 
- 
+
+## Example output
+
+![Example daily output](/example/IoT_example.png)
+
  
  
 ## Changelog
 
 ### TODO
+- server: calendar
+
+### v0.06 
+- java: full build
 
 ### v0.05
-- PHP display
-
+- server: PHP display
 
 ### v0.04
-- build big jar to run from command line
+- java: build big jar to run from command line
 
 ### v0.03
-- send PHP to server
+- server: send PHP to server
     
 ### v0.02
-- joda DateTime
-- reading from port
+- jave: joda DateTime
+- java: reading from port
 
 ### v0.01 
-- connect to port
-- CURL
+- java: connect to port
+- java: CURL
+- ardunio: send to USB port / serial
+- ardunio: collect readings

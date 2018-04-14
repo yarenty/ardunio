@@ -13,7 +13,7 @@ RXTX must be installed after having installed the Java Runtime Environment (JRE)
 
 | Name | Linux (32-bit) | Linux (64-bit) | Mac OSX (after 10.5) |
 |:----|:----|:----|:---|
-|RXTX Java serial controller	| [RXTXcomm.jar](32bit/RXTXcomm.jar)	| [RXTXcomm.jar](64bit/RXTXcomm.jar) |[RXTXcomm.jar](mac/RXTXcomm.jar)|
+|RXTX Java serial controller	| [RXTXcomm.jar](32bit/RXTXcomm.jar)	| [RXTXcomm.jar](64bit/RXTXcomm.jar) |[RXTXcomm.jar](mac/RXTXcom.jar)|
 |RXTX native driver 	|[librxtxSerial.so](32bit/librxtxSerial.so)|[librxtxSerial.so](64bitlibrxtxSerial.so)  | [librxtxSerial.jnilib](mac/librxtxSerial.jnilib)|
 
 

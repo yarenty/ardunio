@@ -12,24 +12,34 @@ Current output:  [IoT](http://www.yarenty.com/ardunio)
 PATH:  
 sensors => ardunio => serial port => java/scala collector => send to server => DB persistence => visualizaiton
 
+# Build
+
+```bash
+gradle shadowJar
+```
 
 
-# PARTS
+# RUN
+
+```bash
+java -cp build/libs/serial.jar com.yarenty.ardunio.DataCollector
+
+```
+
+
+# SOFTWARE PARTS
 
 ## Linux RXTX installation: [follow those steps to install RXTX libraries](libs/README.md)
 
 ##  Java connection - basic intro
-
 http://playground.arduino.cc/interfacing/java
 
 
 ## Add sccess to the USB port 
-
 - Linux
 ```bash
 sudo chown yarenty /dev/ttyUSB0
 ```
- 
 -Mac OSX 
 ```bash
 sudo chown yarenty /dev/tty.<yourUSBport>
@@ -42,8 +52,21 @@ which java
 ```
 copy RXTX libraries to that folders (see first point above) 
  
+  
 
-# EXAMPLES 
+ 
+# HARDWARE PARTS
+
+## Initial prototype
+
+
+## First *prodictionization* - version 1.0
+
+ 
+
+
+
+# OUTPUT EXAMPLES 
 
 ## Web data collection link
 
@@ -61,6 +84,9 @@ http://www.yarenty.com/ardunio/add.php?year=2018&month=1&day=9&hour=10&minute=12
 # TODO
 - server: calendar
  
+
+
+
  
  
 # Changelog

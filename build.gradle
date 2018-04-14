@@ -1,4 +1,4 @@
-group 'com.yarenty'
+group 'com.yarenty.ardunio'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'scala'
@@ -8,8 +8,7 @@ apply plugin: 'scalaStyle'
 apply plugin: 'application'
 
 
-mainClassName = 'com.yarenty.ardunio.SerialTest'
-group = "com.yarenty.ardunio"
+mainClassName = 'com.yarenty.ardunio.DataCollector'
 sourceCompatibility = 1.8
 
 sourceSets {

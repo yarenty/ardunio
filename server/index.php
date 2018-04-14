@@ -1,7 +1,6 @@
 <?php
- error_reporting(E_ALL); ini_set('display_errors', 1);
+error_reporting(E_ALL); ini_set('display_errors', 1);
  
-
 include_once 'db.php';
 include_once 'Office.php';
 
@@ -21,7 +20,7 @@ if ( isset($_GET["year"]) ) {
 	$o->month = $month;
 	$o->day = $day;
 	
-	$readings =  $o->getDay();
+	$readings = $o->getDay();
 
 
 ?>
@@ -41,6 +40,7 @@ if ( isset($_GET["year"]) ) {
 </head>
 
 <body>
+    <h1>IoT - Ardunio sensors data collector v. 1.0</h1>
     <canvas width="1600" height="800" id="canvas"></canvas>
 <script>
  var lineChartData = {
@@ -169,7 +169,23 @@ if ( isset($_GET["year"]) ) {
          <input type="submit" value="Submit">
          </form>
          
-         </center> 
+<?
+    $prev  = mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"));
+        $py= date("Y",$prev);
+        $pm= date("m",$prev);
+        $pd= date("d",$prev);
+    $next  = mktime(0, 0, 0, date("m")  , date("d")+1, date("Y"));
+    $is_next = mktime(0, 0, 0, date("m")  , date("d"), date("Y"))>$next;
+        $ny= date("Y",$next);
+        $nm= date("m",$next);
+        $nd= date("d",$next);
+?>
+         
+        <a href="index.php?year=<?$py?>&month=<?$pm?>&day=<?pd?>"> &lt; &lt; </a>
+        <?if ($is_next) {?> 
+        <a href="index.php?year=<?$py?>&month=<?$pm?>&day=<?pd?>"> &gt; &gt; </a>
+        <?}?>
+        </center> 
          
          
      </body>

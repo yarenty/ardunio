@@ -17,6 +17,7 @@ public class SerialTest implements SerialPortEventListener {
     /** The port we're normally going to use. */
     private static final String PORT_NAMES[] = {
             "/dev/tty.usbserial-A9007UX1", // Mac OS X
+            "/dev/tty.wchusbserial1410", // Mac OS X
             "/dev/ttyACM0", // Raspberry Pi
             "/dev/ttyUSB0", // Linux
             "/dev/ttyUSB1", // Linux
@@ -120,7 +121,7 @@ public class SerialTest implements SerialPortEventListener {
                  for (Integer l : lights) {
                      ll += l;
                  }
-                 ll = ll / lights.size();
+                 ll = 1024 - (ll / lights.size()); //new version - light is inverted ;-)
 
                  Integer ss = 0;
                  for (Integer s : sounds) {

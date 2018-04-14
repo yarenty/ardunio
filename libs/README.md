@@ -1,4 +1,4 @@
-# RXTX for Linux
+# RXTX for Linux / Mac OSX
 jLog communicates with serial devices through the RXTX library available from http://rxtx.qbang.org. 
 
 
@@ -6,7 +6,7 @@ RXTX consists of two parts: The Java extension library RXTXcomm.jar and the seri
 RXTX must be installed after having installed the Java Runtime Environment (JRE) and before installing the jLog application.
 
 
-*Please note that you must install RXTX as a user with 'root', Administrator or similar privileges (e.g. using sudo to run the installation script).*
+*Please note that you must install RXTX as a user with 'root', Administrator or similar privileges (e.g. using sudo).*
 
 ## Installation  
 

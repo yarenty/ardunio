@@ -16,27 +16,24 @@ sensors => ardunio => serial port => java/scala collector => send to server => D
 
 # PARTS
 
-## Linux RXTX installation:
-RXTX library: http://jlog.org/rxtx-lin.html
-
-- Download 'RXTXcomm.jar' and install it in the 'lib/ext' folder of 
-the Java VM (e.g. for Ubuntu: '/usr/java/j2reXXX/lib/ext').   
-- Download 'librxtxSerial.so' and install it in the 'lib/i386' or 'lib/amd64' folder of the Java VM (e.g. for Ubuntu: '/usr/lib/jvm/java-XXX/jre'). Try the 'bin' folder for this file if the 'lib/i386' is not found. Make sure that 'librxtxSerial' has execute permissions for all.  You may need to download the file to a temporary location (e.g. Desktop) and use a privileged command (or sudo from the command/terminal) to move it to the destination.  
-- You may need to Log in as 'root' and add your jLog user to the group owning the '/var/lock' directory and the group owning the serial port (e.g. /dev/ttyS0) to be used. This is not needed for Ubuntu 11.04.
-
-
+## Linux RXTX installation: [follow those steps to install RXTX libraries](libs/README.md)
 
 ##  Java connection - basic intro
 
 http://playground.arduino.cc/interfacing/java
 
 
-## Access to the USB port - Linux
+## Add sccess to the USB port 
 
-```
+- Linux
+```bash
 sudo chown yarenty /dev/ttyUSB0
 ```
  
+-Mac OSX 
+```bash
+sudo chown yarenty /dev/tty.<yourUSBport>
+```
  
 ## ON ERROR: java.lang.UnsatisfiedLinkError: no rxtxSerial in java.library.path
 check if you got proper java directories:
@@ -67,6 +64,15 @@ http://www.yarenty.com/ardunio/add.php?year=2018&month=1&day=9&hour=10&minute=12
  
  
 # Changelog
+
+### 1.0
+- production style version
+
+### 0.08
+- moved from prototype to *production release* ;-)
+
+### 0.07
+- Mac support
 
 ### v0.06 
 - java: full build

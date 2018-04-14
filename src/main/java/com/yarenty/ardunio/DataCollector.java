@@ -12,7 +12,7 @@ import org.joda.time.DateTime;
 import java.util.*;
 
 
-public class SerialTest implements SerialPortEventListener {
+public class DataCollector implements SerialPortEventListener {
     SerialPort serialPort;
     /** The port we're normally going to use. */
     private static final String PORT_NAMES[] = {
@@ -174,7 +174,7 @@ public class SerialTest implements SerialPortEventListener {
     }
 
     public static void main(String[] args) throws Exception {
-        SerialTest main = new SerialTest();
+        DataCollector main = new DataCollector();
         main.initialize();
         Thread t=new Thread() {
             public void run() {

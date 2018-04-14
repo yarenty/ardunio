@@ -11,12 +11,14 @@ RXTX must be installed after having installed the Java Runtime Environment (JRE)
 ## Installation  
 
 
-| Name |  32-bit | 64-bit |
-|RXTX Java serial controller	| RXTXcomm.jar	| RXTXcomm.jar |
-|RXTX driver for i686-pc-linux-gnu	|librxtxSerial.so| |	
-|RXTX driver for x86_64-unknown-linux-gnu |	|librxtxSerial.so |
+| Name | Linux (32-bit) | Linux (64-bit) | Mac OSX (after 10.5) |
+|:----|:----|:----|:---|
+|RXTX Java serial controller	| [RXTXcomm.jar](32bit/RXTXcomm.jar)	| [RXTXcomm.jar](64bit/RXTXcomm.jar) |[RXTXcomm.jar](mac/RXTXcomm.jar)|
+|RXTX native driver 	|[librxtxSerial.so](32bit/librxtxSerial.so)|[librxtxSerial.so](64bitlibrxtxSerial.so)  | [librxtxSerial.jnilib](mac/librxtxSerial.jnilib)|
 
 
+
+### Linux (Ubuntu)
 - Download 'RXTXcomm.jar' and install it in the 'lib/ext' folder of the Java VM (e.g. for Ubuntu 11.04: '/usr/lib/jvm/java-6-sun-1.6.0.26/jre' and for RH9 with Sun's Java 1.6.0_04: '/usr/java/j2re1.6.0_04/lib/ext'). 
 You may need to download the file to a temporary location (e.g. Desktop) and use a privileged command (or sudo from the command/terminal) to move it to the destination.
 - Download 'librxtxSerial.so' and install it in the 'lib/i386' or 'lib/amd64' folder of the Java VM (e.g. for Ubuntu 11.04: '/usr/lib/jvm/java-6-sun-1.6.0.26/jre' and for RH9 with Sun's Java 1.6.0_04: '/usr/java/j2re1.6.0_04/lib/i386'). Try the 'bin' folder for this file if the 'lib/i386' is not found (e.g. for IBM's Java 1.4.x). Make sure that 'librxtxSerial' has execute permissions for all. You may need to download the file to a temporary location (e.g. Desktop) and use a privileged command (or sudo from the command/terminal) to move it to the destination.
@@ -29,3 +31,14 @@ You may need to download the file to a temporary location (e.g. Desktop) and use
 sudo chown user:user /dev/ttyUSB0
 sudo chown user:user /dev/ttyUSB1
 ```
+
+
+### Mac OSX
+- Download 'RXTXcomm.jar' and 'librxtxSerial.jnilib' and install them in the '/Library/Java/Extensions' folder to make them available to all users or '¬/Library/Java/Extensions' to be available for the current user only. 
+- Check your port name: `ls /dev/tty.*` - should be there (tip: remove usb cable and put again to see what is new)
+- make it readable: 
+```bash
+sudo chown user /dev/tty.<yourUSB>
+```
+- *in java code add this port to port listings*
+

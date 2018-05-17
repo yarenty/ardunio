@@ -12,35 +12,79 @@ if ( isset($_GET["year"]) ) {
 	$year = $_GET["year"];
 	$month = $_GET["month"];
 	$day = $_GET["day"];
-	}
+    
+    $prev  = mktime(0, 0, 0, $month  , $day-1, $year);
+        $py= date("Y",$prev);
+        $pm= date("m",$prev);
+        $pd= date("d",$prev);
+    $next  = mktime(0, 0, 0, $month   , $day+1, $year);
+      $is_next = mktime(0, 0, 0, date("m")  , date("d"), date("Y"))>$next;
+        $ny= date("Y",$next);
+        $nm= date("m",$next);
+        $nd= date("d",$next);
+    
+    
+} else {
+    
+    $prev  = mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"));
+        $py= date("Y",$prev);
+        $pm= date("m",$prev);
+        $pd= date("d",$prev);
+    $next  = mktime(0, 0, 0, date("m")  , date("d")+1, date("Y"));
+    $is_next = mktime(0, 0, 0, date("m")  , date("d"), date("Y"))>$next;
+        $ny= date("Y",$next);
+        $nm= date("m",$next);
+        $nd= date("d",$next);
+}
 
 	
-	$o = new Office();
-	$o->year = $year;
-	$o->month = $month;
-	$o->day = $day;
+$o = new Office();
+$o->year = $year;
+$o->month = $month;
+$o->day = $day;
 	
-	$readings = $o->getDay();
+$readings = $o->getDay();
 
 
 ?>
 <!doctype html>
 <html>
 <head>
-    <title>IoT</title>
-    <script src="Chart.bundle.js"></script>
-    <script src="utils.js"></script>
-    <style>
-    canvas {
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-    }
-    </style>
+<title>IoT</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script>
+'use strict';
+
+window.chartColors = {
+	red: 'rgb(255, 99, 132)',
+	redlight: 'rgb(255, 129, 162)',
+	orange: 'rgb(255, 159, 64)',
+	orangelight: 'rgb(255, 189, 94)',
+	yellow: 'rgb(255, 205, 86)',
+	yellowlight: 'rgb(255, 235, 116)',
+	green: 'rgb(75, 192, 192)',
+	greenlight: 'rgb(105, 222, 222)',
+	blue: 'rgb(54, 162, 235)',
+	bluelight: 'rgb(84, 192, 235)',
+	purple: 'rgb(153, 102, 255)',
+	purplelight: 'rgb(183, 132, 255)',
+	grey: 'rgb(201, 203, 207)',
+	greylight: 'rgb(231, 233, 237)'
+};
+</script>
+<style>
+canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+body {margin:0; padding:0; }
+</style>
 </head>
 
 <body>
-    <h1>IoT - Ardunio sensors data collector v. 1.0</h1>
+    <h1>IoT - Ardunio sensors data collector v. 1.0.1</h1>
+    <h2>Observations: <? echo( $year . "-" . $month . "-" . $day); ?></h2>
     <canvas width="1600" height="800" id="canvas"></canvas>
 <script>
  var lineChartData = {
@@ -170,20 +214,12 @@ if ( isset($_GET["year"]) ) {
          </form>
          
 <?
-    $prev  = mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"));
-        $py= date("Y",$prev);
-        $pm= date("m",$prev);
-        $pd= date("d",$prev);
-    $next  = mktime(0, 0, 0, date("m")  , date("d")+1, date("Y"));
-    $is_next = mktime(0, 0, 0, date("m")  , date("d"), date("Y"))>$next;
-        $ny= date("Y",$next);
-        $nm= date("m",$next);
-        $nd= date("d",$next);
+
 ?>
          
-        <a href="index.php?year=<?$py?>&month=<?$pm?>&day=<?pd?>"> &lt; &lt; </a>
+        <a href="index.php?year=<?=$py?>&month=<?=$pm?>&day=<?=$pd?>"> &lt; &lt; </a>
         <?if ($is_next) {?> 
-        <a href="index.php?year=<?$py?>&month=<?$pm?>&day=<?pd?>"> &gt; &gt; </a>
+        <a href="index.php?year=<?=$ny?>&month=<?=$nm?>&day=<?=$nd?>"> &gt; &gt; </a>
         <?}?>
         </center> 
          

@@ -117,20 +117,19 @@ public class DataCollector implements SerialPortEventListener {
                  sounds.add(sound);
                  if (!motion) motion = m;
 
-                 Integer ll = 0;
+                 Integer ll = 0; //medium light
                  for (Integer l : lights) {
                      ll += l;
                  }
                  ll = 1024 - (ll / lights.size()); //new version - light is inverted ;-)
 
-                 Integer ss = 0;
+                 Integer ss = 0; //top sound instead medium
                  for (Integer s : sounds) {
-                     ss += s;
+                     if (s>ss) ss=s;
                  }
-                 ss = ss / sounds.size();
 
                  Integer mm = 0;
-                 if (motion) mm = 1;
+                 if (motion) mm = 1; //if there was any motion
 
                  sendMe = "year=" + newDate.getYear() + "&month=" + newDate.getMonthOfYear() + "&day=" + newDate.getDayOfMonth() + "&hour=" +
                          newDate.getHourOfDay() + "&minute=" + newDate.getMinuteOfHour() + "&light=" + ll + "&sound=" + ss + "&motion=" + mm;

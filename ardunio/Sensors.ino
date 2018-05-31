@@ -30,7 +30,7 @@ void setup() {
   // initialize serial communication at 9600 bits per second:
   pinMode(ledPin, OUTPUT);      // declare LED as output
   pinMode(motionPin, INPUT);     // declare sensor as input
-  
+ 
   Serial.begin(9600);
 }
 
@@ -46,10 +46,11 @@ void loop() {
   Serial.print(mPirState);
   Serial.print("; SND:");
   Serial.println(soundCheck());
+  //Serial.println(analogRead(soundPin));
 }
 
 int soundCheck() {
-   unsigned long startMillis= millis();  // Start of sample window
+   unsigned long startMillis = millis();  // Start of sample window
    unsigned int peakToPeak = 0;   // peak-to-peak level
  
    unsigned int signalMax = 0;
@@ -71,9 +72,18 @@ int soundCheck() {
          }
       }
    }
-   peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
-   double volts = (peakToPeak * 5.0) / 1024;  // convert to volts
+//
+//          Serial.print("min:");
+//          Serial.print(signalMin);
+//          Serial.print(" max:");
+//          Serial.print(signalMax);
+//          Serial.print("  sss:");
+//          Serial.println(sample);
  
+   peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
+   //double volts = (peakToPeak * 5.0) / 1024;  // convert to volts
+
+   //return volts;
    //Serial.print("SOUND:");
    return peakToPeak;
 }

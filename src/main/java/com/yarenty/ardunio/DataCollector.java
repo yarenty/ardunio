@@ -110,6 +110,8 @@ public class DataCollector implements SerialPortEventListener {
              Boolean m = false;
              if (Integer.parseInt(a[1].split(":")[1]) == 1) m = true;
 
+//             System.out.println("\t" +sound + "\t\t" +light+"\t\t"+m);
+
              DateTime newDate = new DateTime();
              if (newDate.getMinuteOfHour() != currentDate.getMinuteOfHour()) {
                  //update clean send
@@ -123,10 +125,16 @@ public class DataCollector implements SerialPortEventListener {
                  }
                  ll = 1024 - (ll / lights.size()); //new version - light is inverted ;-)
 
-                 Integer ss = 0; //top sound instead medium
+                 Integer ss = 0;
+                 //top sound instead medium
+//                 for (Integer s : sounds) {
+//                     if (s>ss) ss=s;
+//                 }
+                 //medium
                  for (Integer s : sounds) {
-                     if (s>ss) ss=s;
+                     ss += s;
                  }
+                 ss /= sounds.size();
 
                  Integer mm = 0;
                  if (motion) mm = 1; //if there was any motion

@@ -177,7 +177,7 @@ body {margin:0; padding:0; }
      },
          
      {type: "linear", display: true,
-      position: "right", id: "y-axis-2", fontColor: window.chartColors.orange,ticks:{min:0.0, max:1024.0 },
+      position: "right", id: "y-axis-2", fontColor: window.chartColors.orange,
       gridLines: {  drawOnChartArea: false,},
       scaleLabel: {
        fontColor:window.chartColors.orange,

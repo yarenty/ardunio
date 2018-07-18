@@ -19,6 +19,19 @@ RXTX must be installed after having installed the Java Runtime Environment (JRE)
 
 
 ### Linux (Ubuntu)
+- check where is java:
+```
+which java
+```
+make sure you are looking to proper file not link!
+Usually it should be: /usr/bin/jvm/oracle-8-java/  or /usr/bin/jvm/oracle-9-java/
+```
+sudo cp RXTXcomm.jar /usr/lib/jvm/java-8-oracle/jre/lib/ext/
+sudo cp librxtxSerial.so /usr/lib/jvm/java-8-oracle/jre/lib/amd64/
+
+
+```
+
 - Download 'RXTXcomm.jar' and install it in the 'lib/ext' folder of the Java VM (e.g. for Ubuntu 11.04: '/usr/lib/jvm/java-6-sun-1.6.0.26/jre' and for RH9 with Sun's Java 1.6.0_04: '/usr/java/j2re1.6.0_04/lib/ext'). 
 You may need to download the file to a temporary location (e.g. Desktop) and use a privileged command (or sudo from the command/terminal) to move it to the destination.
 - Download 'librxtxSerial.so' and install it in the 'lib/i386' or 'lib/amd64' folder of the Java VM (e.g. for Ubuntu 11.04: '/usr/lib/jvm/java-6-sun-1.6.0.26/jre' and for RH9 with Sun's Java 1.6.0_04: '/usr/java/j2re1.6.0_04/lib/i386'). Try the 'bin' folder for this file if the 'lib/i386' is not found (e.g. for IBM's Java 1.4.x). Make sure that 'librxtxSerial' has execute permissions for all. You may need to download the file to a temporary location (e.g. Desktop) and use a privileged command (or sudo from the command/terminal) to move it to the destination.
@@ -29,6 +42,8 @@ You may need to download the file to a temporary location (e.g. Desktop) and use
 
 ```$bash
 sudo chown user:user /dev/ttyUSB0
+
+
 sudo chown user:user /dev/ttyUSB1
 ```
 

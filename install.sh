@@ -14,3 +14,8 @@ cp RXTXcomm.jar /usr/java/j2re1.6.0_04/lib/ext
 cp librxtxSerial.so  /usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/i386 
 cp librxtxSerial.so  /usr/java/j2re1.6.0_04/lib/i386
  
+ 
+
+# ubuntu 18.x 
+sudo cp RXTXcomm.jar /usr/lib/jvm/java-8-oracle/jre/lib/ext/
+sudo cp librxtxSerial.so /usr/lib/jvm/java-8-oracle/jre/lib/amd64/

@@ -83,3 +83,6 @@ src/testScoverage/
 gradlew
 gradlew.bat
 gradle/*
+
+
+*.iml
